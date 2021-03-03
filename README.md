@@ -1,6 +1,6 @@
-# Telegraf image for scraping SNMP from QNAP devices
+# Telegraf image for scraping SNMP from QNAP and APC devices
 
-Building upon work in https://gitlab.com/artkrz/telegraf-qnap
+Building upon work in https://gitlab.com/artkrz/telegraf-qnap and https://github.com/n1koo/qnap-telegraf
 
 Example configuration improved so that it can be sanely used with Grafana (eg. using device identifiers and names and tags, preferring integeres for values instead of strings etc).
 
