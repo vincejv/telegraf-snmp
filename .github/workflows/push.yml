@@ -41,7 +41,7 @@ jobs:
         with:
           context: .
           build-args: version=${{ env.GIT_TAG_NAME }}
-          tags: pidity/telegraf-snmp:${{ env.GIT_TAG_NAME }}
+          tags: pidity/telegraf-snmp:${{ env.GIT_TAG_NAME }},pidity/telegraf-snmp:latest
           push: true
 
       - name: Release
