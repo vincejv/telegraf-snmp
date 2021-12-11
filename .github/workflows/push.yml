@@ -26,9 +26,8 @@ jobs:
       - uses: olegtarasov/get-tag@v2
         id: tagName
         
-      - name: printoutput
-        run: |
-          echo ${{ $env.GIT_TAG_NAME }}
+      - name: printtag
+        run: echo ${{ $env.GIT_TAG_NAME }}
       
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
