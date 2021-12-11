@@ -28,7 +28,7 @@ jobs:
         
       - name: printoutput
         run: |
-          echo ${{ env.GIT_TAG_NAME }}
+          echo ${{ steps.tagName.outputs.tag }}
       
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -40,11 +40,11 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           context: .
-          build-args: version=${{ env.GIT_TAG_NAME }}
-          tags: pidity/telegraf-snmp:${{ env.GIT_TAG_NAME }}"
+          build-args: version=${{ steps.tagName.outputs.tag }}
+          tags: pidity/telegraf-snmp:${{ steps.tagName.outputs.tag }}"
           push: true
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          name: Update Telegraf to ${{ env.GIT_TAG_NAME }}
+          name: Update Telegraf to ${{ steps.tagName.outputs.tag }}
