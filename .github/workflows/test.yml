@@ -23,7 +23,8 @@ jobs:
         id: tag
         uses: dawidd6/action-get-tag@v1
         with:
-          strip_v: true
+        # Optionally strip `v` prefix
+          strip_v: false
       
       # Runs a single command using the runners shell
       - name: Use tag
