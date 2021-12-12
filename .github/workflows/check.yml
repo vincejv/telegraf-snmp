@@ -19,7 +19,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - id: tversion
+      - id: version
         uses: pozetroninc/github-action-get-latest-release@master
         with:
           owner: influxdata 
@@ -28,7 +28,7 @@ jobs:
 
       - name: printoutput
         run: |
-          echo ${{ steps.tversion.outputs.release }}
+          echo ${{ steps.version.outputs.release }}
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out the repo
@@ -40,15 +40,15 @@ jobs:
       # Runs a set of commands using the runners shell
       - id: setversion
         run: |
-          echo ${{ steps.tversion.outputs.release }} > version.txt
+          echo ${{ steps.version.outputs.release }} > version.txt
           cat version.txt  
           # echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
           if [[ $([ -z "`git status --porcelain`" ] && echo "false" || echo "true") == "true" ]]; then
             git config --global user.name 'githubaction'
             git config --global user.email '44616229+pheetr@users.noreply.github.com'
             git add version.txt
-            git commit -am "automated bump version to ${{steps.tversion.outputs.release}}"
-            SHORTVERSION=$(echo ${{steps.tversion.outputs.release}} | cut -c 2-)
+            git commit -am "automated bump version to ${{steps.version.outputs.release}}"
+            SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
             git tag -a -m "automated version bump" $SHORTVERSION
             git push origin --atomic --follow-tags
             echo "new version pushed"
