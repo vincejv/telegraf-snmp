@@ -18,7 +18,7 @@ Based on `snmpwalk` it seems that Qnap doesn't publish eg. memory metrics (cache
 
 Didn't add SSD cache metrics as I don't use that feature
 
-## Automated release
+# Automated release
 
 GitHub Action detects new versions at <https://github.com/influxdata/telegraf/releases>.
 If new version detected:
