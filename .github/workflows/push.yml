@@ -18,7 +18,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       #Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       #- uses: olegtarasov/get-tag@v2 #disabled as it produces tag of triggering push, but a manual update commit may not have tag 
       #  id: tagName
@@ -39,7 +39,7 @@ jobs:
           echo "shortversion=$SHORTVERSION" >> $GITHUB_ENV
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
         with:
           context: .
           build-args: version=${{ env.shortversion }}
-          tags: pidity/telegraf-snmp:${{ env.shortversion }},pidity/telegraf-snmp:latest
+          tags: vincejv/telegraf-snmp:${{ env.shortversion }},vincejv/telegraf-snmp:latest
           push: true
 
       #- name: Release
