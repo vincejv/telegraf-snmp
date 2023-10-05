@@ -58,7 +58,7 @@ services:
                         "result_url" ]
   ```
 
-* Added support for `linux/amd64`,`linux/arm64`,`linux/386`,`linux/arm/v7`,`linux/arm/v6`
+* Added support for `linux/amd64`,`linux/arm64/v8` and `linux/arm/v7`
 
 # Automated release
 

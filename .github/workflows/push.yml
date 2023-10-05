@@ -55,7 +55,7 @@ jobs:
         with:
           context: .
           build-args: version=${{ env.shortversion }}
-          platforms: linux/amd64,linux/arm64,linux/386,linux/arm/v7,linux/arm/v6
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7
           tags: vincejv/telegraf-snmp:${{ env.shortversion }},vincejv/telegraf-snmp:latest
           push: true
 
