@@ -39,7 +39,7 @@ jobs:
         with:
           # use deploy key to trigger further actions (push on tag)
           # use PAT as GA won't trigger if using the default GA token
-          token: "${{ secrets.GITHUB_AUTOMATED_PUSH_TOKEN }}"
+          token: "${{ secrets.REPO_AUTOMATED_PUSH_TOKEN }}"
 
       # Runs a set of commands using the runners shell
       - id: setversion
