@@ -9,8 +9,3 @@ RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" >>
 
 COPY NAS.mib PowerNet436.mib /usr/share/snmp/mibs/
 COPY speedtest-cli.json /root/.config/ookla
-
-COPY --chmod=777 entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["telegraf"]
