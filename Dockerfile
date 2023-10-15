@@ -8,5 +8,5 @@ RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" >>
   rm -rf /var/lib/apt/lists/*
 
 COPY NAS.mib PowerNet436.mib /usr/share/snmp/mibs/
-RUN mkdir -p /etc/telegraf/.config/ookla
-COPY speedtest-cli.json /etc/telegraf/.config/ookla
+RUN mkdir -p /etc/telegraf/.config/ookla && chown telegraf -R /etc/telegraf/.config/
+COPY --chown=telegraf speedtest-cli.json /etc/telegraf/.config/ookla
