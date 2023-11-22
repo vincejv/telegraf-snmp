@@ -1,4 +1,4 @@
-FROM telegraf:latest
+FROM telegraf:v1.28.5
 
 RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" >> /etc/apt/sources.list && \
 	apt-get update &&  apt-get -y install snmp-mibs-downloader curl && \

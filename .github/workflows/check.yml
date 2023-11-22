@@ -25,14 +25,14 @@ jobs:
       - id: version
         uses: pozetroninc/github-action-get-latest-release@master
         with:
-          owner: influxdata 
+          owner: influxdata
           repo: telegraf
           excludes: prerelease, draft
 
       - name: printoutput
         run: |
           echo ${{ steps.version.outputs.release }}
-      
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -45,12 +45,16 @@ jobs:
       - id: setversion
         run: |
           echo ${{ steps.version.outputs.release }} > version.txt
-          cat version.txt  
+          cp Dockerfile Dockerfile.old
+          echo 'FROM telegraf:${{ steps.version.outputs.release }}' > Dockerfile
+          cat Dockerfile.old |tail -n+2>> Dockerfile
+          cat version.txt
           # echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
           if [[ $([ -z "`git status --porcelain`" ] && echo "false" || echo "true") == "true" ]]; then
             git config --global user.name 'githubaction'
             git config --global user.email '1276544+vincejv@users.noreply.github.com'
             git add version.txt
+            git add Dockerfile
             git commit -am "automated bump version to ${{steps.version.outputs.release}}"
             SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
             git tag -a -m "automated version bump" $SHORTVERSION
