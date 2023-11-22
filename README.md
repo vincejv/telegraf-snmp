@@ -45,7 +45,7 @@ services:
   #
 
   [[inputs.exec]]
-  commands = ["/usr/bin/speedtest -f json"]
+  commands = ["/usr/bin/speedtest -f json --accept-license --accept-gdpr"]
   name_override = "speedtest"
   timeout = "4m"
   interval = "20m"
