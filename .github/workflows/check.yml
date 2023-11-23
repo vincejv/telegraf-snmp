@@ -31,7 +31,7 @@ jobs:
 
       - name: printoutput
         run: |
-          echo ${{ steps.version.outputs.release }}
+          echo ${{ steps.version.outputs.release }} | cut -c2-
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out the repo
