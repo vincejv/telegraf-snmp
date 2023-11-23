@@ -31,7 +31,7 @@ jobs:
 
       - name: printoutput
         run: |
-          echo ${{ steps.version.outputs.release }} | cut -c2-
+          echo ${{ steps.version.outputs.release }}
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out the repo
@@ -44,9 +44,10 @@ jobs:
       # Runs a set of commands using the runners shell
       - id: setversion
         run: |
-          echo ${{ steps.version.outputs.release }} > version.txt
+          SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
+          echo ${{steps.version.outputs.release}} > version.txt
           cp Dockerfile Dockerfile.old
-          echo 'FROM telegraf:${{ steps.version.outputs.release }}' > Dockerfile
+          echo "FROM telegraf:$SHORTVERSION" > Dockerfile
           cat Dockerfile.old |tail -n+2>> Dockerfile
           cat version.txt
           # echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
@@ -56,7 +57,6 @@ jobs:
             git add version.txt
             git add Dockerfile
             git commit -am "automated bump version to ${{steps.version.outputs.release}}"
-            SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
             git tag -a -m "automated version bump" $SHORTVERSION
             git push origin --atomic --follow-tags
             echo "new version pushed"
