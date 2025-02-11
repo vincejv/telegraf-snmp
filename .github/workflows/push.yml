@@ -3,7 +3,6 @@ name: Release
 on:
   push:
     branches: [ master ]
-    tags: '**'
 
 env:
   REGISTRY_IMAGE: vincejv/telegraf-snmp
@@ -55,7 +54,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build and push by digest
         id: build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -66,10 +65,11 @@ jobs:
           mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
+          echo "digest=${digest#sha256:}" >> "$GITHUB_OUTPUT"
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests
+          name: digests-${{ steps.export.outputs.digest }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -80,7 +80,7 @@ jobs:
       - build
     steps:
       - name: Download digests
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: digests
           path: /tmp/digests
