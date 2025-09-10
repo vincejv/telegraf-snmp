@@ -8,6 +8,6 @@ RUN echo "deb http://archive.debian.org/debian bookworm main contrib non-free" >
 	mkdir -p /etc/telegraf/.config/ookla && chown telegraf:telegraf -R /etc/telegraf/.config/ && \
   rm -rf /var/lib/apt/lists/*
 
-COPY NAS.mib PowerNet436.mib /usr/share/snmp/mibs/
+COPY NAS_QTS_4.mib NAS_QTS_5.mib PowerNet457.mib /usr/share/snmp/mibs/
 COPY --chown=telegraf speedtest-cli.json /etc/telegraf/.config/ookla
 COPY speedtest-cli.json /root/.config/ookla
