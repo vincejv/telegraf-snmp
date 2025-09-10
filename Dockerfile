@@ -1,6 +1,6 @@
 FROM telegraf:1.36.1
 
-RUN echo "deb http://archive.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
+RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
 	apt-get update &&  apt-get -y install snmp-mibs-downloader curl && \
 	sed -i "s/^\(mibs *:\).*/#\1/" /etc/snmp/snmp.conf && \
 	curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash && \
