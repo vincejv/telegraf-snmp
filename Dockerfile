@@ -1,4 +1,4 @@
-FROM telegraf:1.36.4
+FROM telegraf:1.37.0
 
 RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
 	apt-get update &&  apt-get -y install snmp-mibs-downloader curl && \
